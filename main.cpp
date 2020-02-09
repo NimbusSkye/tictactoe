@@ -81,8 +81,6 @@ bool checkWinner (char board[]) {
         case 'c':
             cout << "Player lost.";
             return true;
-        case 'n':
-            return false;
     }
     switch (checkColumn(board)) {
         case 'p':
@@ -91,8 +89,6 @@ bool checkWinner (char board[]) {
         case 'c':
             cout << "Player lost.";
             return true;
-        case 'n':
-            return false;
     }
     return false;
     }
@@ -144,20 +140,16 @@ void displayBoard (char board[]) {
     int main() {
         //greetAndInstruct();
         char board[27];
-        srand(time(NULL));
-//        board[0]='x';
-//        board[1]='x';
-//        board[2]='o';
-//        board[3]='o';
-//        board[4]='x';
-//        board[5]='x';
-//        board[6]='o';
-        for (int i = 0; i < 9; i++) {
-            if (rand() % 3 == 0)
-                board[i] = 'x';
-            else
-                board[i] = 'o';
-        }
+//        srand(time(NULL));
+//        for (int i = 0; i < 9; i++) {
+//            if (rand() % 3 == 0)
+//                board[i] = 'x';
+//            else
+//                board[i] = 'o';
+//        }
+board[2]='x';
+board[5]='x';
+board[8]='x';
         displayBoard(board);
         cout << endl;
         checkWinner(board);

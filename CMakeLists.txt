@@ -3,4 +3,4 @@ project(tictactoe)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(tictactoe main.cpp functions.cpp functions.h)
+add_executable(tictactoe main.cpp)
