@@ -2,6 +2,8 @@
 #include <string>
 #include <stdlib.h>
 #include <time.h>
+#include <cstring>
+
 using namespace std;
 
 bool checkIfLegal (int cellNbre, char board[]) {
@@ -72,6 +74,46 @@ char checkColumn (char board[]) {
     return 'n';
 }
 
+char checkDiagonal (char board[]) {
+    //Check rightward diagonals, e.g. 1-5-9
+    for (int i = 0; i <= 18; i += 9) {
+        int player = 0;
+        int cpu = 0;
+        for (int j = i; j <= i + 8; j += 4) {
+            switch (board[j]) {
+                case 'x':
+                    player++;
+                    break;
+                case 'o':
+                    cpu++;
+            }
+        }
+        if (player == 3)
+            return 'p';
+        if (cpu == 3)
+            return 'c';
+    }
+    //Check leftward diagonals, e.g. 3-5-7
+    for (int i=2; i<=20; i+=9) {
+        int player = 0;
+        int cpu = 0;
+        for (int j = i; j <= i + 4; j += 2) {
+            switch (board[j]) {
+                case 'x':
+                    player++;
+                    break;
+                case 'o':
+                    cpu++;
+            }
+        }
+        if (player == 3)
+            return 'p';
+        if (cpu == 3)
+            return 'c';
+    }
+    return 'n';
+}
+
 bool checkWinner (char board[]) {
     //Check each row
     switch (checkRow(board)) {
@@ -82,7 +124,17 @@ bool checkWinner (char board[]) {
             cout << "Player lost.";
             return true;
     }
+    //Check each column
     switch (checkColumn(board)) {
+        case 'p':
+            cout << "Player won.";
+            return true;
+        case 'c':
+            cout << "Player lost.";
+            return true;
+    }
+    //Check each diagonal
+    switch (checkDiagonal(board)) {
         case 'p':
             cout << "Player won.";
             return true;
@@ -141,22 +193,40 @@ void displayBoard (char board[]) {
         //greetAndInstruct();
         char board[27];
         srand(time(NULL));
+//        memset(board, ' ', 27);
+//        cout << board << endl;
 //        for (int i = 0; i < 27; i++) {
 //            if (rand() % 2 == 0)
 //                board[i] = 'x';
 //            else
 //                board[i] = 'o';
 //        }
-        for (int i=0; i<=18; i+=9) {
-            for (int j = i; j < i + 3; j+=2) {
-                for (int k=j; k<=j+6; k+=3) {
-                    if(rand()%2==0)
-                        board[k]='x';
-                    else
-                        board[k]='o';
-                }
+//        for (int i=0; i<=18; i+=9) {
+//            for (int j=i; j<=i+8; j+=4) {
+//                if (rand()%2==0)
+//                    board[j]='x';
+//                else
+//                    board[j]='o';
+//            }
+//        }
+        for (int i=2; i<=20; i+=9) {
+            for (int j=i; j<=i+4; j+=2) {
+                if (rand()%2==0)
+                    board[j]='x';
+                else
+                    board[j]='o';
             }
         }
+//        for (int i=0; i<=18; i+=9) {
+//            for (int j = i; j < i + 3; j+=2) {
+//                for (int k=j; k<=j+6; k+=3) {
+//                    if(rand()%2==0)
+//                        board[k]='x';
+//                    else
+//                        board[k]='o';
+//                }
+//            }
+//        }
 //        for (int i = 0; i <=24; i+=6) {
 //            for (int j = i; j < i + 3; j++) {
 //                if (rand() % 2 == 0)
@@ -168,6 +238,5 @@ void displayBoard (char board[]) {
         displayBoard(board);
         cout << endl;
         checkWinner(board);
-//        displayBoard(board);
         return 0;
     }
