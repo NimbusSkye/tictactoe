@@ -353,9 +353,7 @@ void displayBoard (char board[]) {
         greetAndInstruct();
         cout << endl;
         while (!checkWinner(board)) {
-            cout << endl;
             playerMove(board);
-            cout << endl;
             computerMove(board);
             displayBoard(board);
             cout << endl;
