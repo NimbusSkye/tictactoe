@@ -7,17 +7,17 @@
 using namespace std;
 
 bool checkIfLegal (int cellNbre, char board[]) {
-    return (cellNbre > 0 && cellNbre < 28 && board[cellNbre-1]!='x' && board[cellNbre-1]!='o');
+    return (cellNbre > 0 && cellNbre < 28 && board[cellNbre-1]!='X' && board[cellNbre-1]!='O');
 }
 
 void displaySpaces (int a, int b, char board[]) {
     for (int i = a; i <= b; i++) {
         switch (board[i - 1]) {
-            case 'x':
-                cout << 'x';
+            case 'X':
+                cout << 'X';
                 break;
-            case 'o':
-                cout << 'o';
+            case 'O':
+                cout << 'O';
                 break;
             default:
                 cout << i;
@@ -34,10 +34,10 @@ char checkRow (char board[]) {
         int cpu = 0;
         for (int j=i; j<i+3; j++) {
             switch (board[j]) {
-                case 'x':
+                case 'X':
                     player++;
                     break;
-                case 'o':
+                case 'O':
                     cpu++;
                     break;
             }
@@ -57,10 +57,10 @@ char checkColumn (char board[]) {
             int cpu = 0;
             for (int k=j; k<=j+6; k+=3) {
                 switch (board[k]) {
-                    case 'x':
+                    case 'X':
                         player++;
                         break;
-                    case 'o':
+                    case 'O':
                         cpu++;
                         break;
                 }
@@ -81,10 +81,10 @@ char checkDiagonal (char board[]) {
         int cpu = 0;
         for (int j = i; j <= i + 8; j += 4) {
             switch (board[j]) {
-                case 'x':
+                case 'X':
                     player++;
                     break;
-                case 'o':
+                case 'O':
                     cpu++;
             }
         }
@@ -99,10 +99,10 @@ char checkDiagonal (char board[]) {
         int cpu = 0;
         for (int j = i; j <= i + 4; j += 2) {
             switch (board[j]) {
-                case 'x':
+                case 'X':
                     player++;
                     break;
-                case 'o':
+                case 'O':
                     cpu++;
             }
         }
@@ -121,10 +121,10 @@ char checkAdjacent (char board[]) {
         int cpu = 0;
         for (int j = i; j <= i + 18; j += 9) {
             switch (board[j]) {
-                case 'x':
+                case 'X':
                     player++;
                     break;
-                case 'o':
+                case 'O':
                     cpu++;
             }
         }
@@ -143,10 +143,10 @@ char checkSkewLines (char board[]) {
         int cpu=0;
         for (int j=i; j<=i+20; j+=10) {
             switch (board[j]) {
-                case 'x':
+                case 'X':
                     player++;
                     break;
-                case 'o':
+                case 'O':
                     cpu++;
             }
         }
@@ -161,10 +161,10 @@ char checkSkewLines (char board[]) {
         int cpu=0;
         for (int j=i; j<=i+24; j+=12) {
             switch (board[j]) {
-                case 'x':
+                case 'X':
                     player++;
                     break;
-                case 'o':
+                case 'O':
                     cpu++;
             }
         }
@@ -174,13 +174,13 @@ char checkSkewLines (char board[]) {
             return 'c';
     }
     //Check for patterns 1-14-27 and 3-14-25
-    if (board[0]=='x' && board[13]=='x' && board[26]=='x')
+    if (board[0]=='X' && board[13]=='X' && board[26]=='X')
         return 'p';
-    if (board[0]=='o' && board[13]=='o' && board[26]=='o')
+    if (board[0]=='O' && board[13]=='O' && board[26]=='O')
         return 'c';
-    if (board[2]=='x' && board[13]=='x' && board[24]=='x')
+    if (board[2]=='X' && board[13]=='X' && board[24]=='X')
         return 'p';
-    if (board[2]=='o' && board[13]=='o' && board[24]=='o')
+    if (board[2]=='O' && board[13]=='O' && board[24]=='O')
         return 'c';
     return 'n';
 }
@@ -272,7 +272,7 @@ bool checkWinner (char board[]) {
         cout << "Illegal move.";
         return;
     }
-    board[m-1]='x';
+    board[m-1]='X';
 }
 
 void displayBoard (char board[]) {
@@ -326,14 +326,14 @@ void displayBoard (char board[]) {
             copy(board, board+27, test);
             //Check if each move is legal using the test array, then commit if that cell is a win condition for either side
             if (checkIfLegal(i+1, test)) {
-                test[i]='o';
+                test[i]='O';
                 if (checkWinner(test)) {
-                    board[i] = 'o';
+                    board[i] = 'O';
                     return;
                 }
-                test[i]='x';
+                test[i]='X';
                 if (checkWinner(test)) {
-                    board[i]='o';
+                    board[i]='O';
                     return;
                 }
                 }
@@ -341,7 +341,7 @@ void displayBoard (char board[]) {
         //If no cell is a win condition, make a random move
         for (int i=0; i<27; i++) {
             if (checkIfLegal(i+1, board)) {
-                board[i] = 'o';
+                board[i] = 'O';
                 return;
             }
         }
