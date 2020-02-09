@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-#include <cstring>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
 bool checkIfLegal (int cellNbre, char board[]) {
@@ -26,22 +27,18 @@ void displaySpaces (int a, int b, char board[]) {
 }
 
 char checkRow (char board[]) {
-    for (int i = 0; i < 28; i+=3) {
-        int player = 1;
-        int cpu = 1;
-        switch (board[i + 1]) {
-            case 'x':
-                player++;
-                break;
-            case 'o':
-                cpu++;
-        }
-        switch (board[i + 2]) {
-            case 'x':
-                player++;
-                break;
-            case 'o':
-                cpu++;
+    for (int i = 0; i <=24; i+=3) {
+        int player = 0;
+        int cpu = 0;
+        for (int j=i; j<i+3; j++) {
+            switch (board[j]) {
+                case 'x':
+                    player++;
+                    break;
+                case 'o':
+                    cpu++;
+                    break;
+            }
         }
         if (player==3)
             return 'p';
@@ -52,23 +49,19 @@ char checkRow (char board[]) {
 }
 
 char checkColumn (char board[]) {
-    for (int i=0; i<28; i+=9) {
+    for (int i=0; i<=18; i+=9) {
         for (int j = i; j < i + 3; j++) {
             int player = 1;
             int cpu = 1;
-            switch (board[j + 3]) {
-                case 'x':
-                    player++;
-                    break;
-                case 'o':
-                    cpu++;
-            }
-            switch (board[j + 6]) {
-                case 'x':
-                    player++;
-                    break;
-                case 'o':
-                    cpu++;
+            for (int k=j; k<j+3; k++) {
+                switch (board[k]) {
+                    case 'x':
+                        player++;
+                        break;
+                    case 'o':
+                        cpu++;
+                        break;
+                }
             }
             if (player == 3)
                 return 'p';
@@ -151,8 +144,22 @@ void displayBoard (char board[]) {
     int main() {
         //greetAndInstruct();
         char board[27];
-        for (int i = 3; i < 7; i++)
-            board[i] = 'x';
+        srand(time(NULL));
+//        board[0]='x';
+//        board[1]='x';
+//        board[2]='o';
+//        board[3]='o';
+//        board[4]='x';
+//        board[5]='x';
+//        board[6]='o';
+        for (int i = 0; i < 27; i++) {
+            if (rand() % 3 == 0)
+                board[i] = 'x';
+            else if (rand()%3==1)
+                board[i]='o';
+            else
+                board[i] = 'i';
+        }
         displayBoard(board);
         cout << endl;
         checkWinner(board);
