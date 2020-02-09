@@ -26,7 +26,7 @@ void displaySpaces (int a, int b, char board[]) {
 }
 
 char checkRow (char board[]) {
-    for (int i = 0; i < 27; i+=3) {
+    for (int i = 0; i < 28; i+=3) {
         int player = 1;
         int cpu = 1;
         switch (board[i + 1]) {
@@ -51,9 +51,47 @@ char checkRow (char board[]) {
     return 'n';
 }
 
+char checkColumn (char board[]) {
+    for (int i=0; i<28; i+=9) {
+        for (int j = i; j < i + 3; j++) {
+            int player = 1;
+            int cpu = 1;
+            switch (board[j + 3]) {
+                case 'x':
+                    player++;
+                    break;
+                case 'o':
+                    cpu++;
+            }
+            switch (board[j + 6]) {
+                case 'x':
+                    player++;
+                    break;
+                case 'o':
+                    cpu++;
+            }
+            if (player == 3)
+                return 'p';
+            if (cpu == 3)
+                return 'c';
+        }
+    }
+    return 'n';
+}
+
 bool checkWinner (char board[]) {
     //Check each row
     switch (checkRow(board)) {
+        case 'p':
+            cout << "Player won.";
+            return true;
+        case 'c':
+            cout << "Player lost.";
+            return true;
+        case 'n':
+            return false;
+    }
+    switch (checkColumn(board)) {
         case 'p':
             cout << "Player won.";
             return true;
