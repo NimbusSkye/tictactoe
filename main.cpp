@@ -51,9 +51,9 @@ char checkRow (char board[]) {
 char checkColumn (char board[]) {
     for (int i=0; i<=18; i+=9) {
         for (int j = i; j < i + 3; j++) {
-            int player = 1;
-            int cpu = 1;
-            for (int k=j; k<j+3; k++) {
+            int player = 0;
+            int cpu = 0;
+            for (int k=j; k<=j+6; k+=3) {
                 switch (board[k]) {
                     case 'x':
                         player++;
@@ -152,13 +152,11 @@ void displayBoard (char board[]) {
 //        board[4]='x';
 //        board[5]='x';
 //        board[6]='o';
-        for (int i = 0; i < 27; i++) {
+        for (int i = 0; i < 9; i++) {
             if (rand() % 3 == 0)
                 board[i] = 'x';
-            else if (rand()%3==1)
-                board[i]='o';
             else
-                board[i] = 'i';
+                board[i] = 'o';
         }
         displayBoard(board);
         cout << endl;
