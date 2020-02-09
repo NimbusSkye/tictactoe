@@ -20,7 +20,7 @@ int main() {
             break;
         }
         displayBoard(board);
-        cout << endl;
+        cout << endl << endl;
     }
     return 0;
 }

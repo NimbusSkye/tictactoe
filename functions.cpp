@@ -221,14 +221,15 @@ bool checkWinner (char board[]) {
 }
 
 void playerMove(char board[]) {
-    cout << "Type a cell number: ";
-    int m=0;
-    cin >> m;
-    if (!checkIfLegal(m, board)) {
-        cout << "Illegal move.";
-        return;
+    int m=1;
+    while(true) {
+        cout << "Type a cell number: ";
+        cin >> m;
+        if (checkIfLegal(m, board))
+            break;
+        cout << "Illegal move." << endl;
     }
-    board[m-1]='X';
+        board[m - 1] = 'X';
 }
 
 void displayBoard (char board[]) {
