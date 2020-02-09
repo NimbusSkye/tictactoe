@@ -278,10 +278,35 @@ void displayBoard (char board[]) {
             exit(0);
     }
 
+    void computerMove(char board[]) {
+        char test[27];
+        for (int i = 0; i < 27; i++) {
+            //Protect original board by copying it into another array
+            for (int j = 0; j < 27; j++)
+                test[j] = board[j];
+            //Check if each move is legal using the test array, then commit if that cell is a win condition for either side
+            if (checkIfLegal(i, board)) {
+                test[i]='o';
+                if (checkWinner(test)) {
+                    board[i] = 'o';
+                    return;
+                }
+            }
+    }
+        //If no cells are a win condition, make a random move
+        board[rand()%27]='o';
+}
+
     int main() {
         char board[27];
         srand(time(NULL));
         memset(board, ' ', 27);
+//        for (int i=2; i<=24; i+=11) {
+//            if(rand()%2==0)
+//                board[i]='x';
+//            else
+//                board[i]='o';
+//        }
 //        cout << board << endl;
 //        for (int i = 0; i < 27; i++) {
 //            if (rand() % 2 == 0)
@@ -297,14 +322,14 @@ void displayBoard (char board[]) {
 //                    board[j]='o';
 //            }
 //        }
-        for (int i=2; i<=20; i+=9) {
-            for (int j=i; j<=i+4; j+=2) {
-                if (rand()%2==0)
-                    board[j]='x';
-                else
-                    board[j]='o';
-            }
-        }
+//        for (int i=2; i<=20; i+=9) {
+//            for (int j=i; j<=i+4; j+=2) {
+//                if (rand()%2==0)
+//                    board[j]='x';
+//                else
+//                    board[j]='o';
+//            }
+//        }
 //        for (int i=0; i<=18; i+=9) {
 //            for (int j = i; j < i + 3; j+=2) {
 //                for (int k=j; k<=j+6; k+=3) {
