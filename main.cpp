@@ -140,16 +140,31 @@ void displayBoard (char board[]) {
     int main() {
         //greetAndInstruct();
         char board[27];
-//        srand(time(NULL));
-//        for (int i = 0; i < 9; i++) {
-//            if (rand() % 3 == 0)
+        srand(time(NULL));
+//        for (int i = 0; i < 27; i++) {
+//            if (rand() % 2 == 0)
 //                board[i] = 'x';
 //            else
 //                board[i] = 'o';
 //        }
-board[2]='x';
-board[5]='x';
-board[8]='x';
+        for (int i=0; i<=18; i+=9) {
+            for (int j = i; j < i + 3; j+=2) {
+                for (int k=j; k<=j+6; k+=3) {
+                    if(rand()%2==0)
+                        board[k]='x';
+                    else
+                        board[k]='o';
+                }
+            }
+        }
+//        for (int i = 0; i <=24; i+=6) {
+//            for (int j = i; j < i + 3; j++) {
+//                if (rand() % 2 == 0)
+//                    board[j] = 'x';
+//                else
+//                    board[j] = 'o';
+//            }
+//        }
         displayBoard(board);
         cout << endl;
         checkWinner(board);
