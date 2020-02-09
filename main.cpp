@@ -25,6 +25,47 @@ void displaySpaces (int a, int b, char board[]) {
     }
 }
 
+char checkRow (char board[]) {
+    for (int i = 0; i < 27; i+=3) {
+        int player = 1;
+        int cpu = 1;
+        switch (board[i + 1]) {
+            case 'x':
+                player++;
+                break;
+            case 'o':
+                cpu++;
+        }
+        switch (board[i + 2]) {
+            case 'x':
+                player++;
+                break;
+            case 'o':
+                cpu++;
+        }
+        if (player==3)
+            return 'p';
+        if (cpu==3)
+            return 'c';
+}
+    return 'n';
+}
+
+bool checkWinner (char board[]) {
+    //Check each row
+    switch (checkRow(board)) {
+        case 'p':
+            cout << "Player won.";
+            return true;
+        case 'c':
+            cout << "Player lost.";
+            return true;
+        case 'n':
+            return false;
+    }
+    return false;
+    }
+
 void displayBoard (char board[]) {
     displaySpaces(1, 3, board);
     cout << "      ";
@@ -62,17 +103,21 @@ void displayBoard (char board[]) {
         cout << "Start? (y/n):";
         char ans;
         cin >> ans;
-        /*if (ans == 'y')
-            displayBoard();
+        char board[27];
+        if (ans == 'y')
+            displayBoard(board);
         else
-            exit 0;*/
+            exit(0);
     }
 
     int main() {
         //greetAndInstruct();
         char board[27];
-        for (int i = 0; i < 27; i++)
-            board[i] = 'a';
+        for (int i = 3; i < 7; i++)
+            board[i] = 'x';
         displayBoard(board);
+        cout << endl;
+        checkWinner(board);
+//        displayBoard(board);
         return 0;
     }
