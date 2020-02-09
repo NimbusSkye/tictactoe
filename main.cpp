@@ -189,50 +189,91 @@ bool checkWinner (char board[]) {
     //Check each row
     switch (checkRow(board)) {
         case 'p':
-            cout << "Player won.";
             return true;
         case 'c':
-            cout << "Player lost.";
             return true;
     }
     //Check each column
     switch (checkColumn(board)) {
         case 'p':
-            cout << "Player won.";
             return true;
         case 'c':
-            cout << "Player lost.";
             return true;
     }
     //Check each diagonal
     switch (checkDiagonal(board)) {
         case 'p':
-            cout << "Player won.";
             return true;
         case 'c':
-            cout << "Player lost.";
             return true;
     }
     //Check each adjacent pattern e.g. 1-10-19
     switch (checkAdjacent(board)) {
         case 'p':
-            cout << "Player won.";
             return true;
         case 'c':
-            cout << "Player lost.";
             return true;
     }
     //Check each skew line e.g. 1-11-21, 1-13-25, 1-14-27, 3-14-25
     switch (checkSkewLines(board)) {
         case 'p':
-            cout << "Player won.";
             return true;
         case 'c':
-            cout << "Player lost.";
             return true;
     }
     return false;
     }
+
+    char whoWins (char board[]) {
+        //Check each row
+        switch (checkRow(board)) {
+            case 'p':
+                return 'p';
+            case 'c':
+                return 'c';
+        }
+        //Check each column
+        switch (checkColumn(board)) {
+            case 'p':
+                return 'p';
+            case 'c':
+                return 'c';
+        }
+        //Check each diagonal
+        switch (checkDiagonal(board)) {
+            case 'p':
+                return 'p';
+            case 'c':
+                return 'c';
+        }
+        //Check each adjacent pattern e.g. 1-10-19
+        switch (checkAdjacent(board)) {
+            case 'p':
+                return 'p';
+            case 'c':
+                return 'c';
+        }
+        //Check each skew line e.g. 1-11-21, 1-13-25, 1-14-27, 3-14-25
+        switch (checkSkewLines(board)) {
+            case 'p':
+                return 'p';
+            case 'c':
+                cout << "Player lost.";
+                return 'c';
+        }
+        return 'n';
+}
+
+    void playerMove(char board[]) {
+    cout << "Type a cell number: ";
+    int m=0;
+    cin >> m;
+    if (!checkIfLegal(m, board)) {
+        cout << "Illegal move.";
+        return;
+    }
+    board[m-1]='x';
+}
 
 void displayBoard (char board[]) {
     displaySpaces(1, 3, board);
@@ -282,74 +323,49 @@ void displayBoard (char board[]) {
         char test[27];
         for (int i = 0; i < 27; i++) {
             //Protect original board by copying it into another array
-            for (int j = 0; j < 27; j++)
-                test[j] = board[j];
+            copy(board, board+27, test);
             //Check if each move is legal using the test array, then commit if that cell is a win condition for either side
-            if (checkIfLegal(i, board)) {
+            if (checkIfLegal(i+1, test)) {
                 test[i]='o';
                 if (checkWinner(test)) {
                     board[i] = 'o';
                     return;
                 }
+                test[i]='x';
+                if (checkWinner(test)) {
+                    board[i]='o';
+                    return;
+                }
+                }
             }
-    }
-        //If no cells are a win condition, make a random move
-        board[rand()%27]='o';
+        //If no cell is a win condition, make a random move
+        for (int i=0; i<27; i++) {
+            if (checkIfLegal(i+1, board)) {
+                board[i] = 'o';
+                return;
+            }
+        }
 }
 
     int main() {
         char board[27];
         srand(time(NULL));
-        memset(board, ' ', 27);
-//        for (int i=2; i<=24; i+=11) {
-//            if(rand()%2==0)
-//                board[i]='x';
-//            else
-//                board[i]='o';
-//        }
-//        cout << board << endl;
-//        for (int i = 0; i < 27; i++) {
-//            if (rand() % 2 == 0)
-//                board[i] = 'x';
-//            else
-//                board[i] = 'o';
-//        }
-//        for (int i=0; i<=18; i+=9) {
-//            for (int j=i; j<=i+8; j+=4) {
-//                if (rand()%2==0)
-//                    board[j]='x';
-//                else
-//                    board[j]='o';
-//            }
-//        }
-//        for (int i=2; i<=20; i+=9) {
-//            for (int j=i; j<=i+4; j+=2) {
-//                if (rand()%2==0)
-//                    board[j]='x';
-//                else
-//                    board[j]='o';
-//            }
-//        }
-//        for (int i=0; i<=18; i+=9) {
-//            for (int j = i; j < i + 3; j+=2) {
-//                for (int k=j; k<=j+6; k+=3) {
-//                    if(rand()%2==0)
-//                        board[k]='x';
-//                    else
-//                        board[k]='o';
-//                }
-//            }
-//        }
-//        for (int i = 0; i <=24; i+=6) {
-//            for (int j = i; j < i + 3; j++) {
-//                if (rand() % 2 == 0)
-//                    board[j] = 'x';
-//                else
-//                    board[j] = 'o';
-//            }
-//        }
-        displayBoard(board);
+        greetAndInstruct();
         cout << endl;
-        checkWinner(board);
+        while (!checkWinner(board)) {
+            cout << endl;
+            playerMove(board);
+            cout << endl;
+            computerMove(board);
+            displayBoard(board);
+            cout << endl;
+        }
+        switch (whoWins(board)) {
+            case 'p':
+                cout << "Player won.";
+                break;
+            default:
+                cout << "Player lost.";
+        }
         return 0;
     }
