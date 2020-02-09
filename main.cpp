@@ -114,6 +114,77 @@ char checkDiagonal (char board[]) {
     return 'n';
 }
 
+char checkAdjacent (char board[]) {
+    //Check for patterns like 1-9-19 (same cell on each board)
+    for (int i = 0; i < 9; i++) {
+        int player = 0;
+        int cpu = 0;
+        for (int j = i; j <= i + 18; j += 9) {
+            switch (board[j]) {
+                case 'x':
+                    player++;
+                    break;
+                case 'o':
+                    cpu++;
+            }
+        }
+        if (player == 3)
+            return 'p';
+        if (cpu == 3)
+            return 'c';
+    }
+    return 'n';
+}
+
+char checkSkewLines (char board[]) {
+    //Check for patterns like 1-11-21 (row across all 3 boards)
+    for (int i=0; i<=6; i+=3) {
+        int player=0;
+        int cpu=0;
+        for (int j=i; j<=i+20; j+=10) {
+            switch (board[j]) {
+                case 'x':
+                    player++;
+                    break;
+                case 'o':
+                    cpu++;
+            }
+        }
+        if (player==3)
+            return 'p';
+        if (cpu==3)
+            return 'c';
+    }
+    //Check for patterns like 1-13-25 (column across all 3 boards)
+    for (int i=0; i<3; i++) {
+        int player=0;
+        int cpu=0;
+        for (int j=i; j<=i+24; j+=12) {
+            switch (board[j]) {
+                case 'x':
+                    player++;
+                    break;
+                case 'o':
+                    cpu++;
+            }
+        }
+        if (player==3)
+            return 'p';
+        if (cpu==3)
+            return 'c';
+    }
+    //Check for patterns 1-14-27 and 3-14-25
+    if (board[0]=='x' && board[13]=='x' && board[26]=='x')
+        return 'p';
+    if (board[0]=='o' && board[13]=='o' && board[26]=='o')
+        return 'c';
+    if (board[2]=='x' && board[13]=='x' && board[24]=='x')
+        return 'p';
+    if (board[2]=='o' && board[13]=='o' && board[24]=='o')
+        return 'c';
+    return 'n';
+}
+
 bool checkWinner (char board[]) {
     //Check each row
     switch (checkRow(board)) {
@@ -135,6 +206,24 @@ bool checkWinner (char board[]) {
     }
     //Check each diagonal
     switch (checkDiagonal(board)) {
+        case 'p':
+            cout << "Player won.";
+            return true;
+        case 'c':
+            cout << "Player lost.";
+            return true;
+    }
+    //Check each adjacent pattern e.g. 1-10-19
+    switch (checkAdjacent(board)) {
+        case 'p':
+            cout << "Player won.";
+            return true;
+        case 'c':
+            cout << "Player lost.";
+            return true;
+    }
+    //Check each skew line e.g. 1-11-21, 1-13-25, 1-14-27, 3-14-25
+    switch (checkSkewLines(board)) {
         case 'p':
             cout << "Player won.";
             return true;
@@ -190,10 +279,9 @@ void displayBoard (char board[]) {
     }
 
     int main() {
-        //greetAndInstruct();
         char board[27];
         srand(time(NULL));
-//        memset(board, ' ', 27);
+        memset(board, ' ', 27);
 //        cout << board << endl;
 //        for (int i = 0; i < 27; i++) {
 //            if (rand() % 2 == 0)
