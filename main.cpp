@@ -352,9 +352,19 @@ void displayBoard (char board[]) {
         srand(time(NULL));
         greetAndInstruct();
         cout << endl;
-        while (!checkWinner(board)) {
+        while (true) {
             playerMove(board);
+            if (checkWinner(board)) {
+                displayBoard(board);
+                cout << endl;
+                break;
+            }
             computerMove(board);
+            if (checkWinner(board)) {
+                displayBoard(board);
+                cout << endl;
+                break;
+            }
             displayBoard(board);
             cout << endl;
         }
