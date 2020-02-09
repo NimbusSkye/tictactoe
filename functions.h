@@ -8,7 +8,6 @@
 #define TICTACTOE_FUNCTIONS_H
 bool checkIfLegal (int cellNbre, char board[]);
 bool checkWinner (char board[]);
-char whoWins (char board[]);
 void playerMove(char board[]);
 void displayBoard (char board[]);
 void greetAndInstruct();

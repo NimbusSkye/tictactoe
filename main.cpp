@@ -10,24 +10,17 @@ int main() {
         playerMove(board);
         if (checkWinner(board)) {
             displayBoard(board);
-            cout << endl;
+            cout << endl << "Player won.";
             break;
         }
         computerMove(board);
         if (checkWinner(board)) {
             displayBoard(board);
-            cout << endl;
+            cout << endl << "Player lost.";
             break;
         }
         displayBoard(board);
         cout << endl;
-    }
-    switch (whoWins(board)) {
-        case 'p':
-            cout << "Player won.";
-            break;
-        default:
-            cout << "Player lost.";
     }
     return 0;
 }

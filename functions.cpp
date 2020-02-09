@@ -220,46 +220,6 @@ bool checkWinner (char board[]) {
     return false;
 }
 
-char whoWins (char board[]) {
-    //Check each row
-    switch (checkRow(board)) {
-        case 'p':
-            return 'p';
-        case 'c':
-            return 'c';
-    }
-    //Check each column
-    switch (checkColumn(board)) {
-        case 'p':
-            return 'p';
-        case 'c':
-            return 'c';
-    }
-    //Check each diagonal
-    switch (checkDiagonal(board)) {
-        case 'p':
-            return 'p';
-        case 'c':
-            return 'c';
-    }
-    //Check each adjacent pattern e.g. 1-10-19
-    switch (checkAdjacent(board)) {
-        case 'p':
-            return 'p';
-        case 'c':
-            return 'c';
-    }
-    //Check each skew line e.g. 1-11-21, 1-13-25, 1-14-27, 3-14-25
-    switch (checkSkewLines(board)) {
-        case 'p':
-            return 'p';
-        case 'c':
-            cout << "Player lost.";
-            return 'c';
-    }
-    return 'n';
-}
-
 void playerMove(char board[]) {
     cout << "Type a cell number: ";
     int m=0;
