@@ -5,7 +5,7 @@ This is an implementation of the 3D Tic-Tac-Toe game, whereby there are many mor
 
 A brief summary of the game be found [here](http://pi.math.cornell.edu/~mec/2003-2004/graphtheory/tictactoe/howtoplayttt.html) (scroll down to "Three-dimensional Tic-Tac-Toe").
 
-Simply compile the cpp files using your C++ compiler of choice. 
+[Download here](https://github.com/NimbusSkye/tictactoe/releases/download/1.0.0/TicTacToe.zip). Simply compile the cpp files using your C++ compiler of choice. 
 
 Sample output:
 ```
