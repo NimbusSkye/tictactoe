@@ -16,8 +16,7 @@ The board is numbered from 1 to 27 as per the following:
 4 | 5 | 6      13 | 14 | 15      22 | 23 | 24
 ---------      ------------      ------------
 7 | 8 | 9      16 | 17 | 19      25 | 26 | 27
-Player starts first. Simply input the number of the cell you want to occupy. Player’s move is marked with X. 
-Computer’s move is marked with O.
+Player starts first. Simply input the number of the cell you want to occupy. Player’s move is marked with X. Computer’s move is marked with O.
 Start? (y/n):y
 1 | 2 | 3      10 | 11 | 12      19 | 20 | 21
 ---------------------------------------
@@ -31,25 +30,25 @@ X | O | 3      10 | 11 | 12      19 | 20 | 21
 ---------------------------------------
 7 | 8 | 9      16 | 17 | 18      25 | 26 | 27      
 
-Type a cell number: 5
+Type a cell number: 27
 X | O | 3      10 | 11 | 12      19 | 20 | 21
 ---------------------------------------
-4 | X | 6      13 | 14 | 15      22 | 23 | 24      
+4 | 5 | 6      13 | O | 15      22 | 23 | 24      
 ---------------------------------------
-7 | 8 | O      16 | 17 | 18      25 | 26 | 27      
+7 | 8 | 9      16 | 17 | 18      25 | 26 | X      
 
-Type a cell number: 4
+Type a cell number: 9
 X | O | 3      10 | 11 | 12      19 | 20 | 21
 ---------------------------------------
-X | X | O      13 | 14 | 15      22 | 23 | 24      
+4 | O | 6      13 | O | 15      22 | 23 | 24      
 ---------------------------------------
-7 | 8 | O      16 | 17 | 18      25 | 26 | 27      
+7 | 8 | X      16 | 17 | 18      25 | 26 | X      
 
-Type a cell number: 7
+Type a cell number: 18
 X | O | 3      10 | 11 | 12      19 | 20 | 21
 ---------------------------------------
-X | X | O      13 | 14 | 15      22 | 23 | 24      
+4 | O | 6      13 | O | 15      22 | 23 | 24      
 ---------------------------------------
-X | 8 | O      16 | 17 | 18      25 | 26 | 27      
+7 | 8 | X      16 | 17 | X      25 | 26 | X      
 Player won.
 ```
