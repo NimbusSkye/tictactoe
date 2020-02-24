@@ -16,7 +16,8 @@ The board is numbered from 1 to 27 as per the following:
 4 | 5 | 6      13 | 14 | 15      22 | 23 | 24
 ---------      ------------      ------------
 7 | 8 | 9      16 | 17 | 19      25 | 26 | 27
-Player starts first. Simply input the number of the cell you want to occupy. Player’s move is marked with X. Computer’s move is marked with O.
+Player starts first. Simply input the number of the cell you want to occupy. Player’s move is marked with X. 
+Computer’s move is marked with O.
 Start? (y/n):y
 1 | 2 | 3      10 | 11 | 12      19 | 20 | 21
 ---------------------------------------
